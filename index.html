@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Script Python en Navegador</title>
+
+    <!-- Cargar recursos de PyScript -->
+    <link rel="stylesheet" href="https://pyscript.net/releases/2024.1.1/core.css">
+    <script type="module" src="https://pyscript.net/releases/2024.1.1/core.js"></script>
+</head>
+<body style="background-color: #1e1e1e; color: #ffffff; font-family: monospace; padding: 20px;">
+
+    <h1>Ejecutando Python en el Navegador</h1>
+    <p>Abre la consola para interactuar con los inputs del sistema:</p>
+
+    <!-- Script de Python -->
+    <script type="py" terminal>
+while True:
+    print("*"*20)
+    print("Seleccione entre los siguientes casos:")
+    print("*"*20)
+    print("="*20)
+    print("1. Factorial")
+    print("="*20)
+    print("2. Fibonacci")
+    print("="*20)
+    print("3. Listas")
+    print("="*20)
+    print("4. TDA COLA")
+    print("="*20)
+    print("5. Salir")
+    print("="*20)
+
+    try:
+        posicion = int(input("Ingrese la posición: "))
+    except ValueError:
+        print("Por favor ingrese un número válido.")
+        continue
+
+    match posicion:
+        case 1:
+            def factorial(n):
+                if n == 0:
+                    return 1
+                return n * factorial(n-1)
+
+            def mos(n):
+                cade = "x".join(str(i) for i in range(n, 0, -1))
+                print(f"{n}! = {cade} = {factorial(n)}")
+
+            numero = int(input("Ingrese un numero: "))
+            print("-"*30)
+            print(f"El factorial de {numero} es {factorial(numero)}")
+            print("-"*30)
+            print("Se uso el siguiente calculo para calcular el factorial:")
+            mos(numero)
+            print(f"El numero utilizado para hacer le calculo fue {numero}...")
+            print("-"*30)
+            print("")
+
+        case 2:
+            def fibonacci(n, a = 0, b = 1):
+                if n == 0:
+                    return a
+                elif n == 1:
+                    return b
+                return fibonacci(n-1, b, a + b)
+
+            posicion = int(input("Ingrese la posición de Fibonacci que desea calcular: "))
+            resultado = fibonacci(posicion)
+            print(f"El valor de fibonacci en la posición {posicion} es {resultado}")
+
+        case 3:
+            compras = ["ele0","ele1", "ele2", "ele3", "ele4", "ele5", "ele6", "Albert Einstein"]
+
+            while True:
+                print("\n----- LISTA DE COMPRAS -----")
+                print("1. Agregar producto")
+                print("2. Mostrar lista")
+                print("3. Insertar un producto(original)")
+                print("4. Modificar un producto")
+                print("5. Insertar producto")
+                print("6. Eliminar producto")
+                print("7. Salir")
+                print("8. Mostrar 3 elementos específicos")
+                print("9. Modificar un producto por valor")
+                
+                opcion = input("Seleccione una opción: ")
+                
+                if opcion == "1":
+                    producto = input("Escriba el producto: ")
+                    compras.append(producto)
+                    print("Producto agregado correctamente.")
+                    
+                elif opcion == "2":
+                    print("\n--- Productos ---")
+                    if len(compras) == 0:
+                        print("La lista está vacía.")
+                    else:
+                        for i in range(len(compras)):
+                            print(f"{i}: {compras[i]}")
+                            
+                elif opcion == "3":
+                    producto = input("Escriba el producto: ")
+                    posicion = int(input("¿En qué posición desea colocarlo?: "))
+                    compras.insert(posicion, producto)
+                    print("Producto insertado.")
+
+                elif opcion == "4":
+                    if len(compras) == 0:
+                        print("La lista está vacía. Agregue productos primero.")
+                    else:
+                        posicion = int(input("¿Qué posición desea modificar?: "))
+                        if 0 <= posicion < len(compras):
+                            producto = input("Escriba el nuevo producto: ")
+                            compras[posicion] = producto
+                            print("Producto modificado correctamente.")
+                        else:
+                            print("Posición fuera de rango.")
+
+                elif opcion == "5":
+                    entrada = input("Escriba: ")
+                    nueva_lista = [p.strip() for p in entrada.split(",")]
+                    posicion = int(input("¿Desde qué posición desea insertarlos?: "))
+                    compras[posicion : posicion + len(nueva_lista)] = nueva_lista
+                    print("Lista de productos insertada correctamente.")
+                    
+                elif opcion == "6":
+                    producto = input("¿Qué producto desea eliminar?: ")
+                    if producto in compras:
+                        compras.remove(producto)
+                        print("Producto eliminado correctamente.")
+                    else:
+                        print("El producto no se encuentra en la lista.")
+                        
+                elif opcion == "7":
+                    print("Programa de listas finalizado.")
+                    break
+
+                elif opcion == "8":
+                    elemento = int(input("Escriba el primer elemento que desea mostrar: "))
+                    q = elemento + 1
+                    w = elemento + 2
+                    cant = len(compras)
+                    pos = len(compras) - 3
+
+                    if q < len(compras) and w < len(compras):
+                        print(f"Elemento en posición {elemento}: {compras[elemento]}")
+                        print(f"Elemento en posición {q}: {compras[q]}")
+                        print(f"Elemento en posición {w}: {compras[w]}")
+                    else:
+                        print(f"Posición fuera de rango. Solo hay {cant} elementos en la lista.")
+                        print(f"Puede mostrar elementos desde la posición 0 hasta la posición {pos}.")
+
+                elif opcion == "9":
+                    posicion = input("¿Qué Elemento desea modificar?: ")
+                    if posicion in compras:
+                        nuevo_valor = input("Escriba el nuevo producto: ")
+                        index = compras.index(posicion)
+                        compras[index] = nuevo_valor
+                        print("Producto modificado correctamente.")
+                    else:
+                        print("El producto no se encuentra en la lista.")
+                else:
+                    print("Opción no válida.")
+
+        case 4:
+            cola = []
+            while True:
+                print("--- MENÚ TDA COLA ---")
+                print("1. Encolar (Agregar elemento)")
+                print("2. Desencolar (Eliminar / Atender)")
+                print("3. Ver el frente")
+                print("4. Mostrar la cola completa")
+                print("5. Salir")
+                
+                opcion = input("Elige una opción: ")
+                
+                if opcion == "1":
+                    dato = input("¿Qué deseas agregar a la cola?: ")
+                    cola.append(dato)
+                    print(f"'{dato}' fue agregado a la cola.")
+                    
+                elif opcion == "2":
+                    if len(cola) > 0:
+                        atendido = cola.pop(0)
+                        print(f"'{atendido}' fue desencolado/atendido.")
+                    else:
+                        print("La cola está vacía, no hay nada que eliminar.")
+                        
+                elif opcion == "3":
+                    if len(cola) > 0:
+                        print(f"El elemento en el frente es: '{cola[0]}'")
+                    else:
+                        print("La cola está vacía.")
+                        
+                elif opcion == "4":
+                    print(f"Estado actual de la cola: {cola}")
+                    
+                elif opcion == "5":
+                    print("¡Menú Cola finalizado!")
+                    break
+                else:
+                    print("Opción inválida. Intenta con un número del 1 al 5.")
+
+        case 5:
+            print("Hasta la vista baby!")
+            break
+
+        case _:
+            print("Opción no válida")
+    </script>
+</body>
+</html>
