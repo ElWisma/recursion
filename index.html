@@ -3,18 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Script Python en Navegador</title>
+    <title>Terminal Python en GitHub Pages</title>
 
-    <!-- Cargar recursos de PyScript -->
+    <!-- Cargamos CSS de PyScript y XTerm -->
     <link rel="stylesheet" href="https://pyscript.net/releases/2024.1.1/core.css">
     <script type="module" src="https://pyscript.net/releases/2024.1.1/core.js"></script>
 </head>
-<body style="background-color: #1e1e1e; color: #ffffff; font-family: monospace; padding: 20px;">
+<body style="background-color: #0d1117; color: #c9d1d9; font-family: monospace; padding: 20px;">
 
-    <h1>Ejecutando Python en el Navegador</h1>
-    
-    <!-- Se agrega la propiedad 'worker' junto a 'terminal' -->
-    <script type="py" worker terminal>
+    <h2>Menú Interactivo en Python</h2>
+    <p>La terminal cargará abajo en unos segundos...</p>
+
+    <!-- Usamos 'terminal' y 'type="py"' apuntando a un intérprete con soporte xterm -->
+    <script type="py" terminal>
+import sys
+
 while True:
     print("*"*20)
     print("Seleccione entre los siguientes casos:")
@@ -34,7 +37,7 @@ while True:
     try:
         posicion = int(input("Ingrese la posición: "))
     except ValueError:
-        print("Por favor ingrese un número válido.")
+        print("Por favor ingrese un número válido.\n")
         continue
 
     match posicion:
@@ -48,15 +51,14 @@ while True:
                 cade = "x".join(str(i) for i in range(n, 0, -1))
                 print(f"{n}! = {cade} = {factorial(n)}")
 
-            numero = int(input("Ingrese un numero: "))
+            numero = int(input("Ingrese un número: "))
             print("-"*30)
             print(f"El factorial de {numero} es {factorial(numero)}")
             print("-"*30)
-            print("Se uso el siguiente calculo para calcular el factorial:")
+            print("Se usó el siguiente cálculo para calcular el factorial:")
             mos(numero)
-            print(f"El numero utilizado para hacer le calculo fue {numero}...")
-            print("-"*30)
-            print("")
+            print(f"El número utilizado para hacer el cálculo fue {numero}...")
+            print("-"*30 + "\n")
 
         case 2:
             def fibonacci(n, a = 0, b = 1):
@@ -66,9 +68,9 @@ while True:
                     return b
                 return fibonacci(n-1, b, a + b)
 
-            posicion = int(input("Ingrese la posición de Fibonacci que desea calcular: "))
-            resultado = fibonacci(posicion)
-            print(f"El valor de fibonacci en la posición {posicion} es {resultado}")
+            posicion_f = int(input("Ingrese la posición de Fibonacci que desea calcular: "))
+            resultado = fibonacci(posicion_f)
+            print(f"El valor de fibonacci en la posición {posicion_f} es {resultado}\n")
 
         case 3:
             compras = ["ele0","ele1", "ele2", "ele3", "ele4", "ele5", "ele6", "Albert Einstein"]
@@ -102,27 +104,27 @@ while True:
                             
                 elif opcion == "3":
                     producto = input("Escriba el producto: ")
-                    posicion = int(input("¿En qué posición desea colocarlo?: "))
-                    compras.insert(posicion, producto)
+                    pos_ins = int(input("¿En qué posición desea colocarlo?: "))
+                    compras.insert(pos_ins, producto)
                     print("Producto insertado.")
 
                 elif opcion == "4":
                     if len(compras) == 0:
                         print("La lista está vacía. Agregue productos primero.")
                     else:
-                        posicion = int(input("¿Qué posición desea modificar?: "))
-                        if 0 <= posicion < len(compras):
+                        pos_mod = int(input("¿Qué posición desea modificar?: "))
+                        if 0 <= pos_mod < len(compras):
                             producto = input("Escriba el nuevo producto: ")
-                            compras[posicion] = producto
+                            compras[pos_mod] = producto
                             print("Producto modificado correctamente.")
                         else:
                             print("Posición fuera de rango.")
 
                 elif opcion == "5":
-                    entrada = input("Escriba: ")
+                    entrada = input("Escriba (separados por coma): ")
                     nueva_lista = [p.strip() for p in entrada.split(",")]
-                    posicion = int(input("¿Desde qué posición desea insertarlos?: "))
-                    compras[posicion : posicion + len(nueva_lista)] = nueva_lista
+                    pos_ins2 = int(input("¿Desde qué posición desea insertarlos?: "))
+                    compras[pos_ins2 : pos_ins2 + len(nueva_lista)] = nueva_lista
                     print("Lista de productos insertada correctamente.")
                     
                 elif opcion == "6":
@@ -153,10 +155,10 @@ while True:
                         print(f"Puede mostrar elementos desde la posición 0 hasta la posición {pos}.")
 
                 elif opcion == "9":
-                    posicion = input("¿Qué Elemento desea modificar?: ")
-                    if posicion in compras:
+                    pos_val = input("¿Qué Elemento desea modificar?: ")
+                    if pos_val in compras:
                         nuevo_valor = input("Escriba el nuevo producto: ")
-                        index = compras.index(posicion)
+                        index = compras.index(pos_val)
                         compras[index] = nuevo_valor
                         print("Producto modificado correctamente.")
                     else:
@@ -167,7 +169,7 @@ while True:
         case 4:
             cola = []
             while True:
-                print("--- MENÚ TDA COLA ---")
+                print("\n--- MENÚ TDA COLA ---")
                 print("1. Encolar (Agregar elemento)")
                 print("2. Desencolar (Eliminar / Atender)")
                 print("3. Ver el frente")
@@ -204,11 +206,11 @@ while True:
                     print("Opción inválida. Intenta con un número del 1 al 5.")
 
         case 5:
-            print("Hasta la vista baby!")
-            break
+            print("¡Hasta la vista baby!")
+            sys.exit()
 
         case _:
-            print("Opción no válida")
+            print("Opción no válida\n")
     </script>
 </body>
 </html>
